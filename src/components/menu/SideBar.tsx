@@ -12,37 +12,37 @@ const SideBar = () => {
                         <a className="text-decoration-none text-white d-sm-inline d-flex align-itemcenter ms-3 mt-3" href="">
                             <div className='d-flex flex-row gap-2'>
                                 <img src="https://handel.cl/wp-content/uploads/2021/12/cropped-circle-logo-32x32.png"  alt="img transparencia" /> 
-                                <span className="ms-1 py-2 py-sm-0 fs-4 d-none d-sm-inline">EAPTransparencia</span>    
+                                <span className="ms-1 py-2 py-sm-0 fs-5 d-none d-sm-inline">EAPTransparencia</span>    
                             </div>                        
                            
                         </a>
                         <hr className="text-secondary d-none d-sm-block"/>
                         <ul className="nav nav-pills flex-column mt-3 mt-sm-0">
-                            <li className="nav-item text-white fs-4 my-1 py-2 py-sm-0">
+                            <li className="nav-item text-white fs-5 my-1 py-2 py-sm-0">
                                 <a href="#" className="nav-link text-white fs-5" aria-current="page">
                                 <i className="fs-4 bi bi-speedometer2"></i>
                                 <span className="ms-3 d-none d-sm-inline">Dashboard</span>
                                 </a>
                             </li>
-                            <li className="nav-item text-white fs-4 my-1 py-2 py-sm-0">
+                            <li className="nav-item text-white fs-5 my-1 py-2 py-sm-0">
                                 <a href="#" className="nav-link text-white fs-5" aria-current="page">
                                     <i className="bi bi-download"></i>
                                     <span className="ms-3 d-none d-sm-inline">Scanner</span>
                                 </a>
                             </li>
-                            <li className="nav-item text-white fs-4 my-1 py-2 py-sm-0">
+                            <li className="nav-item text-white fs-5 my-1 py-2 py-sm-0">
                                 <a href="#" className="nav-link text-white fs-5" aria-current="page">
                                     <i className="bi bi-upload"></i>
                                     <span className="ms-3 d-none d-sm-inline">Data Uploader</span>
                                 </a>
                             </li>
-                            <li className="nav-item text-white fs-4 my-1 py-2 py-sm-0">
+                            <li className="nav-item text-white fs-5 my-1 py-2 py-sm-0">
                                 <a href="#" className="nav-link text-white fs-5" aria-current="page">
                                     <i className="bi bi-send"></i>
                                     <span className="ms-3 d-none d-sm-inline">Data Transfer</span>
                                 </a>
                             </li>
-                            <li className="nav-item text-white fs-4 my-1 py-2 py-sm-0">
+                            <li className="nav-item text-white fs-5 my-1 py-2 py-sm-0">
                                 <a href="#" className="nav-link text-white fs-5" aria-current="page">
                                     <i className="bi bi-gear"></i>
                                     <span className="ms-3 d-none d-sm-inline">Configuraciones</span>
