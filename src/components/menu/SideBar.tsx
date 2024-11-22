@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../../assets/css/SideBar.css';
 import Content from '../content/Content';
 import SideBarItem from './SideBarItem';
 
 const SideBar: React.FC = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [selectedMenu, setSelectedMenu] = useState(0);
+    
 
     const toggleSidebar = () => {
       setIsCollapsed(prevState => !prevState);
@@ -49,11 +51,11 @@ const SideBar: React.FC = () => {
             </a>
             </li>
             <hr className={`text-secondary ${isCollapsed ? 'd-none' : 'd-sm-block'}`}/>
-            <SideBarItem text={"Dashboard"} active={isCollapsed} icon={"fs-4 bi bi-speedometer2"} />       
-            <SideBarItem text={"Scanner"} active={isCollapsed}  icon={"bi bi-download"}/>       
-            <SideBarItem text={"Data Uploader"} active={isCollapsed}  icon={"bi bi-upload"}/>       
-            <SideBarItem text={"Data Transfer"} active={isCollapsed} icon={"bi bi-send"} />       
-            <SideBarItem text={"Configuraciones"} active={isCollapsed}  icon={"bi bi-gear"}/>         
+            <SideBarItem text={"Dashboard"} active={isCollapsed} icon={"fs-4 bi bi-speedometer2"} setSelectedMenu={setSelectedMenu} index={0}  />       
+            <SideBarItem text={"Scanner"} active={isCollapsed}  icon={"bi bi-download"} setSelectedMenu={setSelectedMenu} index={1} />       
+            <SideBarItem text={"Data Uploader"} active={isCollapsed}  icon={"bi bi-upload"} setSelectedMenu={setSelectedMenu} index={2} />       
+            <SideBarItem text={"Data Transfer"} active={isCollapsed} icon={"bi bi-send"} setSelectedMenu={setSelectedMenu} index={3} />       
+            <SideBarItem text={"Configuraciones"} active={isCollapsed}  icon={"bi bi-gear"} setSelectedMenu={setSelectedMenu} index={4} />         
             <li className="nav-item text-white fs-5  ">
               <button
                 onClick={toggleSidebar}
@@ -70,7 +72,7 @@ const SideBar: React.FC = () => {
             </li>
           </ul>
         </div>
-            <Content/>
+            <Content indexMenu={selectedMenu}/>
        
       </div>
     </>

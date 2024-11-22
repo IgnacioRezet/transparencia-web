@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Check from '../../assets/img/check.png';
-import UnCheck from '../../assets/img/uncheck.png';
-import Info from '../../assets/img/info.png';
+import Check from '../../../assets/img/check.png';
+import UnCheck from '../../../assets/img/uncheck.png';
+import Info from '../../../assets/img/info.png';
 
 const Scanner = () => {
   const [searchTerm, setSearchTerm] = useState('');
