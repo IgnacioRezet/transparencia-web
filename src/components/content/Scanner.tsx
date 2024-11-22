@@ -38,13 +38,13 @@ const Scanner = () => {
 
   return (
     <>
-      <div className="row mb-5">
+      <div className="row mb-3">
         <div className="col-md-12 col-sm-12 col-lg-12 col-xs-12 d-flex flex-direction-row justify-content-between">
           <h1>Proceso Scanner</h1>
           <button className="btn btn-primary">Iniciar Proceso</button>
         </div>
       </div>
-      <div className='row py-5'>
+       <div className='row py-5'>
           <div className='col-md-6 col-lg-6 col-xs-6 col-sm-6'>
             <select name="cbFiltro" id="cbFiltro" className="form-select" aria-label="Default select example">
               <option value="0">Seleccione proceso y mes...</option>
@@ -56,8 +56,8 @@ const Scanner = () => {
             </select>
           </div>
         </div>
-      <div className="row mb-4">
-        <div className="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+      <div className="row mb-4 d-flex justify-content-end">
+        <div className="col-md-2 col-lg-2 col-xs-2 col-sm-2 ">
           <input
             type="text"
             className="form-control"
@@ -99,7 +99,7 @@ const Scanner = () => {
             </tbody>
           </table>
           <nav>
-            <ul className="pagination justify-content-center">
+            <ul className="pagination justify-content-end">
               <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
                 <button
                   className="page-link"
