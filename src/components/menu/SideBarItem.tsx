@@ -9,7 +9,9 @@ interface SideBarInput{
 const SideBarItem = (props: SideBarInput) => {
 
  const handleMenu = () => {
+    localStorage.setItem("menu-selected",props.index.toString())
     props.setSelectedMenu(props.index);
+    
  }
   
   return (

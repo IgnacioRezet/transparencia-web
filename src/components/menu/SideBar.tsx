@@ -4,8 +4,8 @@ import Content from '../content/Content';
 import SideBarItem from './SideBarItem';
 
 const SideBar: React.FC = () => {
-    const [isCollapsed, setIsCollapsed] = useState(false);
-    const [selectedMenu, setSelectedMenu] = useState(0);
+    const [isCollapsed, setIsCollapsed] = useState(false); 
+    const [selectedMenu, setSelectedMenu] = useState(localStorage.getItem("menu-selected") == null ? 0: Number(localStorage.getItem("menu-selected")));
     
 
     const toggleSidebar = () => {
@@ -72,7 +72,7 @@ const SideBar: React.FC = () => {
             </li>
           </ul>
         </div>
-            <Content indexMenu={selectedMenu}/>
+            <Content indexMenu={selectedMenu} setSelectedMenu={setSelectedMenu}/>
        
       </div>
     </>

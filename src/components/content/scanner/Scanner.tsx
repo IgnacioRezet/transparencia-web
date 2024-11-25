@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import Check from '../../../assets/img/check.png';
 import UnCheck from '../../../assets/img/uncheck.png';
 import Info from '../../../assets/img/info.png';
+import Table from '../../custom/Table';
 
-const Scanner = () => {
+interface ScannerInput {
+  setScannerProcess: any;
+} 
+
+const Scanner = (props: ScannerInput) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
@@ -36,12 +41,18 @@ const Scanner = () => {
     setCurrentPage(1);
   };
 
+  const handleProccess = () =>{
+    localStorage.setItem("scanner-2", "true");
+    props.setScannerProcess(true);
+
+  }
+
   return (
     <>
       <div className="row mb-3">
         <div className="col-md-12 col-sm-12 col-lg-12 col-xs-12 d-flex flex-direction-row justify-content-between">
           <h1>Proceso Scanner</h1>
-          <button className="btn btn-primary">Iniciar Proceso</button>
+          <button className="btn btn-primary" onClick={handleProccess}>Iniciar Proceso</button>
         </div>
       </div>
        <div className='row py-5'>
@@ -98,6 +109,7 @@ const Scanner = () => {
               ))}
             </tbody>
           </table>
+         
           <nav>
             <ul className="pagination justify-content-end">
               <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
