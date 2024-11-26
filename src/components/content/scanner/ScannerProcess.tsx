@@ -14,7 +14,7 @@ const ScannerProcess = (props: ScannerProcessInput) => {
     // Simulación del progreso
     const interval = setInterval(() => {
       setProgress((prev) => {
-        const nextProgress = prev + 10;
+        const nextProgress = prev + 1;
         if (nextProgress >= 100) {
           clearInterval(interval);
           return 100;
