@@ -1,37 +1,63 @@
 import Accordion from 'react-bootstrap/Accordion';
+import Table from '../../custom/Table';
+import HeaderTitle from '../../custom/HeaderTitle';
+import { useEffect, useState } from 'react';
 
-const ScannerProcess = () => {
+interface ScannerProcessInput{
+  setScannerProcess: any;
+}
+
+const ScannerProcess = (props: ScannerProcessInput) => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    // Simulación del progreso
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        const nextProgress = prev + 10;
+        if (nextProgress >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return nextProgress;
+      });
+    }, 500);
+
+    return () =>  clearInterval(interval)
+  }, []);
+
+  const rows = [
+    { reparticion: 'Repartición 1', nombre: 'Repartición 1', cantidad: 3000 },
+    { reparticion: 'Repartición 2', nombre: 'Repartición 2', cantidad: 1500 },
+    { reparticion: 'Repartición 3', nombre: 'Repartición 3', cantidad: 1000 },
+    { reparticion: 'Repartición 4', nombre: 'Repartición 4', cantidad: 2000 },
+    { reparticion: 'Repartición 5', nombre: 'Repartición 5', cantidad: 2500 },
+    { reparticion: 'Repartición 6', nombre: 'Repartición 6', cantidad: 5000 },
+    { reparticion: 'Repartición 7', nombre: 'Repartición 7', cantidad: 4000 },
+    { reparticion: 'Repartición 8', nombre: 'Repartición 8', cantidad: 3500 },
+    { reparticion: 'Repartición 9', nombre: 'Repartición 9', cantidad: 4500 },
+  ];
+
+  useEffect(() => {
+    if(progress >= 100){
+      localStorage.removeItem("scanner-2");
+      props.setScannerProcess("");
+    }
+  },[progress])
   return (
     <>
-      <div className="row mb-3">
-        <div className="col-md-12 col-sm-12 col-lg-12 col-xs-12 d-flex flex-direction-row justify-content-between">
-          <h1>Proceso Scanner</h1>
-          <button className="btn btn-primary">Iniciar Proceso</button>
-        </div>
-      </div>
+      <HeaderTitle title={'Proceso Scanner'} textBtn={'Iniciar Proceso'} menu={'2'} now={progress} />
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0">
-          <Accordion.Header>Accordion Item #1</Accordion.Header>
+          <Accordion.Header>Detalle del Proceso</Accordion.Header>
           <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
-          <Accordion.Header>Accordion Item #2</Accordion.Header>
+          <Accordion.Header>Registros del Proceso</Accordion.Header>
           <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+           <Table rows={rows}/>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>    

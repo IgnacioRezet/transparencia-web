@@ -12,7 +12,7 @@ interface ContentInput {
 }
 
 const Content = (props: ContentInput) => {
-  const [scannerProcess, setScannerProcess] = useState(localStorage.getItem("scanner-2") == null ? false: true);
+ 
   const [uploaderProcess, setUploaderProcess] = useState(false);
   const [transferProcess, setTransferProcess] = useState(false);
 
@@ -20,12 +20,8 @@ const Content = (props: ContentInput) => {
     switch (props.indexMenu) {
       case 0:
         return <DashBoard/>
-      case 1:
-        if(!scannerProcess){
-          return <Scanner setScannerProcess={setScannerProcess} />;
-        }else{
-          return <ScannerProcess/>
-        }
+      case 1:       
+          return <Scanner/>;
         
       case 2:
         return <Uploader />;
