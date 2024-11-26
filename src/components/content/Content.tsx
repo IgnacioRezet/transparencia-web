@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import Config from './configuracion/Config';
 import DashBoard from './dashboard/DashBoard';
 import Scanner from './scanner/Scanner';
 import Transfer from './transfer/Transfer';
 import Uploader from './uploader/Uploader';
-import ScannerProcess from './scanner/ScannerProcess';
+
 
 interface ContentInput {
   indexMenu: number;
@@ -13,8 +12,8 @@ interface ContentInput {
 
 const Content = (props: ContentInput) => {
  
-  const [uploaderProcess, setUploaderProcess] = useState(false);
-  const [transferProcess, setTransferProcess] = useState(false);
+  // const [uploaderProcess, setUploaderProcess] = useState(false);
+  // const [transferProcess, setTransferProcess] = useState(false);
 
   const ContentMenu = () => {
     switch (props.indexMenu) {
