@@ -3,28 +3,64 @@ import Table from '../../custom/Table';
 import HeaderTitle from '../../custom/HeaderTitle';
 import { useEffect, useState } from 'react';
 
-interface ScannerProcessInput{
+interface ScannerProcessInput {
   setScannerProcess: any;
 }
 
 const ScannerProcess = (props: ScannerProcessInput) => {
   const [progress, setProgress] = useState(0);
+  const [logs, setLogs] = useState<string[]>([]);
 
   useEffect(() => {
-    // Simulación del progreso
+    // Simulación del progreso y logs
+    const logMessages = [
+      "Iniciando proceso...",
+      "Conectando con el servidor...",
+      "Cargando datos de 'Repartición Código AA001 / Nombre: PRESIDENCIA DE LA REPUBLICA'",
+      "La aplicación se pausara al ejecutar 55 request.",
+      "Scaneo de AA001-Personal a Contrata",
+      "Elemento con keyword 'Personal a Contrata' cliqueado",
+      "No se ha encontrado boton 'Descarga csv'. Error en GetLastTabName: Timed out after 0.5 seconds,",
+      "Elemento: 2024;2023;2022;2021;2020;2019;2018;Historico",
+      "Elemento con Keyword '2024' cliqueado",
+      "No se han encontrado boton 'Descarga'. Error en GetlastTabName: Timed out after o.5 seconds,",
+      "Elementos: Septiembre;Agosto;Julio;Junio;Mayo;Abril;Marzo;Febrero;Enero",
+      "Elemento Keyword 'Septiembre' cliqueado",
+      "Archivo correctamente descargado 'C:/User/Downloads'",
+      "Procesando datos...",
+      "Guardando resultados...",
+      "Finalizando proceso...",
+    ];
+
+    let logIndex = 0;
+
     const interval = setInterval(() => {
       setProgress((prev) => {
-        const nextProgress = prev + 1;
-        if (nextProgress >= 100) {
+        const nextProgress = prev + 5; // Incrementa el progreso
+        if (nextProgress >= 105) {
           clearInterval(interval);
-          return 100;
+          setLogs((prevLogs) => [...prevLogs, "Proceso completado."]);
+          return 105;
         }
         return nextProgress;
       });
-    }, 500);
 
-    return () =>  clearInterval(interval)
+      // Agregar nuevos logs
+      if (logIndex < logMessages.length) {
+        setLogs((prevLogs) => [...prevLogs, logMessages[logIndex]]);
+        logIndex++;
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (progress >= 105) {
+      localStorage.removeItem("scanner-2");
+      props.setScannerProcess("");
+    }
+  }, [progress]);
 
   const rows = [
     { reparticion: 'Repartición 1', nombre: 'Repartición 1', cantidad: 3000 },
@@ -38,12 +74,6 @@ const ScannerProcess = (props: ScannerProcessInput) => {
     { reparticion: 'Repartición 9', nombre: 'Repartición 9', cantidad: 4500 },
   ];
 
-  useEffect(() => {
-    if(progress >= 100){
-      localStorage.removeItem("scanner-2");
-      props.setScannerProcess("");
-    }
-  },[progress])
   return (
     <>
       <HeaderTitle title={'Proceso Scanner'} textBtn={'Iniciar Proceso'} menu={'2'} now={progress} />
@@ -51,19 +81,24 @@ const ScannerProcess = (props: ScannerProcessInput) => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Detalle del Proceso</Accordion.Header>
           <Accordion.Body>
-
+            <div className='container-fluid'>
+              <div className="logs-container" style={{ maxHeight: '600px', overflowY: 'auto', backgroundColor: '#f8f9fa', padding: '10px', borderRadius: '5px' }}>
+                {logs.map((log, index) => (
+                  <div key={index} style={{ fontFamily: 'monospace', color: '#333' }}>{log}</div>
+                ))}
+              </div>
+            </div>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
           <Accordion.Header>Registros del Proceso</Accordion.Header>
           <Accordion.Body>
-           <Table rows={rows}/>
+            <Table rows={rows} />
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>    
+      </Accordion>
     </>
-    
   );
-}
+};
 
 export default ScannerProcess;

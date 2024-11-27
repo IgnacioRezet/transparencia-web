@@ -18,7 +18,7 @@ interface HeaderTitleInput {
             <h1>{props.title}</h1>
             </div>
           
-          {props.menu == "1" || props.now >= 100 ? (
+          {props.menu == "1" || props.now >= 105 ? (
             <button className="btn btn-primary" onClick={props.onClick} >
             {props.textBtn}
           </button>

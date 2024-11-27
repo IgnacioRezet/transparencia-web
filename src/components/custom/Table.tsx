@@ -1,6 +1,7 @@
 import Check from '../../assets/img/check.png';
 import UnCheck from '../../assets/img/uncheck.png';
 import Info from '../../assets/img/info.png';
+import Eye from '../../assets/img/eye.png'
 import { useState } from 'react';
 
 interface TableInputs{
@@ -58,16 +59,18 @@ const Table = (props:TableInputs) => {
                 <tr key={index}>
                   <td>{row.reparticion}</td>
                   <td>{row.nombre}</td>
-                  <td>{row.cantidad}</td>
+                  <td><a href="#">{row.cantidad}</a></td>
                   <td>
                     <div className="d-flex gap-2">
-                      <img src={Check} width="30" alt="aprobado" />
-                      <img src={UnCheck} width="30" alt="no aprobado" />
-                      <img src={Info} width="30" alt="info" />
-                      <img src={Check} width="30" alt="aprobado" />
+                      <img title='Contrata' src={Check} width="30" alt="aprobado" />
+                      <img title='Planta' src={UnCheck} width="30" alt="no aprobado" />
+                      <img title='Honorarios' src={Info} width="30" alt="info" />
+                      <img title='Codigo del trabajo' src={Check} width="30" alt="aprobado" />
                     </div>
                   </td>
-                  <td>Acciones</td>
+                  <td>
+                    <a href="#"><img src={Eye} title='Ver Registros' width="30" alt="ojo" /></a>
+                  </td>
                 </tr>
               ))}
             </tbody>
