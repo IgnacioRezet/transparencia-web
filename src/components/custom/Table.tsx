@@ -1,38 +1,39 @@
+import React, { useState } from 'react';
 import Check from '../../assets/img/check.png';
 import UnCheck from '../../assets/img/uncheck.png';
 import Info from '../../assets/img/info.png';
-import Eye from '../../assets/img/eye.png'
-import { useState } from 'react';
+import Eye from '../../assets/img/eye.png';
 
-interface TableInputs{
-    rows: { reparticion: string; nombre: string; cantidad: number; }[];
-  
+interface TableProps {
+  rows: { reparticion: string; nombre: string; cantidad: number; }[];
+  handleShowModal: (row: { reparticion: string; nombre: string; cantidad: number; }, tipoModal: string) => void; // Añade esta línea
 }
-const Table = (props:TableInputs) => {
+
+const Table: React.FC<TableProps> = ({ rows, handleShowModal }) => { // Asegúrate de recibir handleShowModal como prop
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
 
-    const filteredRows = props.rows.filter((row) =>
-        row.reparticion.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    
-      const totalRows = filteredRows.length;
-      const totalPages = Math.ceil(totalRows / rowsPerPage);
-      const paginatedRows = filteredRows.slice(
-        (currentPage - 1) * rowsPerPage,
-       currentPage * rowsPerPage
-      );
+  const filteredRows = rows.filter((row) =>
+    row.reparticion.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-      const handleSearch = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setSearchTerm(e.target.value);
-        setCurrentPage(1);
-      };
+  const totalRows = filteredRows.length;
+  const totalPages = Math.ceil(totalRows / rowsPerPage);
+  const paginatedRows = filteredRows.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1);
+  };
 
   return (
     <>
-    <div className="row mb-4 d-flex justify-content-end">
-        <div className="col-md-3 col-lg-3 col-xs-3 col-sm-3 ">
+      <div className="row mb-4 d-flex justify-content-end">
+        <div className="col-md-3 col-lg-3 col-xs-3 col-sm-3">
           <input
             type="text"
             className="form-control"
@@ -59,7 +60,7 @@ const Table = (props:TableInputs) => {
                 <tr key={index}>
                   <td>{row.reparticion}</td>
                   <td>{row.nombre}</td>
-                  <td><a href="#">{row.cantidad}</a></td>
+                  <td><a href="#" onClick={() => handleShowModal(row, "1")}>{row.cantidad}</a></td>
                   <td>
                     <div className="d-flex gap-2">
                       <img title='Contrata' src={Check} width="30" alt="aprobado" />
@@ -69,7 +70,7 @@ const Table = (props:TableInputs) => {
                     </div>
                   </td>
                   <td>
-                    <a href="#"><img src={Eye} title='Ver Registros' width="30" alt="ojo" /></a>
+                    <a href="#" onClick={() => handleShowModal(row,"0")}><img src={Eye} title='Ver Registros' width="30" alt="ojo" /></a>
                   </td>
                 </tr>
               ))}
@@ -118,7 +119,7 @@ const Table = (props:TableInputs) => {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Table
+export default Table;

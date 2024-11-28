@@ -1,15 +1,21 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { Col, Container, Row } from 'react-bootstrap';
+
+interface ContentItem {
+  textError: string;
+}
 
 interface ModalInput {
   headerTitle: string;
   title: string;
-  content: string;
+  icon: string;
+  content: ContentItem[];
   onHide: () => void;
   show: boolean;
 }
 
-const ModalComponent: React.FC<ModalInput> = ({ headerTitle, title, content, onHide, show }) => {
+const ModalLista: React.FC<ModalInput> = ({ headerTitle, content, onHide, show }) => {
   return (
     <Modal
       show={show}
@@ -24,14 +30,22 @@ const ModalComponent: React.FC<ModalInput> = ({ headerTitle, title, content, onH
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>{title}</h4>
-        <p>{content}</p>
+       
+        <Container>
+          {content.map((c, index) => (
+            <Row key={index}className='py-2'>
+              <Col >
+                {c.textError}
+              </Col>
+            </Row>
+          ))}
+        </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
+        <Button onClick={onHide}>Cerrar</Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default ModalComponent;
+export default ModalLista;
