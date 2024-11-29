@@ -6,10 +6,11 @@ import Eye from '../../assets/img/eye.png';
 
 interface TableProps {
   rows: { reparticion: string; nombre: string; cantidad: number; }[];
-  handleShowModal: (row: { reparticion: string; nombre: string; cantidad: number; }, tipoModal: string) => void; // Añade esta línea
+  handleShowModal: (row: { reparticion: string; nombre: string; cantidad: number; }, tipoModal: string) => void;
+  header: {text: string;}[]; // Añade esta línea
 }
 
-const Table: React.FC<TableProps> = ({ rows, handleShowModal }) => { // Asegúrate de recibir handleShowModal como prop
+const Table: React.FC<TableProps> = ({ rows, handleShowModal, header }) => { // Asegúrate de recibir handleShowModal como prop
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
@@ -48,11 +49,11 @@ const Table: React.FC<TableProps> = ({ rows, handleShowModal }) => { // Asegúra
           <table className="table">
             <thead className="table-dark">
               <tr>
-                <th>Repartición</th>
-                <th>Nombre</th>
-                <th>Cantidad</th>
-                <th>Contratos</th>
-                <th>Acciones</th>
+              
+                {header.map((h, index) => (
+                  <th key={index}>{h.text}</th>
+                ))}
+              
               </tr>
             </thead>
             <tbody>

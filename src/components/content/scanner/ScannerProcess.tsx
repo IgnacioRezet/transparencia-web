@@ -9,12 +9,12 @@ import ModalLista from '../../custom/ModalLista';
 const ScannerProcess = () => {
   const [progress, setProgress] = useState(0);
   const [logs, setLogs] = useState<string[]>(() => {
-    const storedLogs = localStorage.getItem('logMessages');
+    const storedLogs = localStorage.getItem('logMessages-scanner');
     return storedLogs ? JSON.parse(storedLogs) : [];
   });
   const [startProcess, setStartProcess] = useState(false);
   const [activeAcordion, setActiveAcordion] = useState("1");
-  const [showAcordion, setShowAcordion] = useState(localStorage.getItem("show-acordion") == null ? "none": "");
+  const [showAcordion, setShowAcordion] = useState(localStorage.getItem("show-acordion-scanner") == null ? "none": "");
   const [menuHeader, setMenuHeader] = useState("1");
 
   const [showModal, setShowModal] = useState(false);
@@ -67,9 +67,9 @@ const ScannerProcess = () => {
         "Guardando resultados...",
         "Finalizando proceso...",
       ];
-      localStorage.setItem('logMessages', JSON.stringify(logMessages)); 
+      localStorage.setItem('logMessages-scanner', JSON.stringify(logMessages)); 
       let logIndex = 0;
-
+   
       const interval = setInterval(() => {
         setProgress((prev) => {
           const nextProgress = prev + 5; // Incrementa el progreso
@@ -112,6 +112,13 @@ const ScannerProcess = () => {
     { textError: "3. No data este servicio no tiene personal sujeto al codigo del trabajo;"}
   ]
   
+  const headerTable = [
+    {text: "Repartición"},
+    {text: "Nombre"},
+    {text: "Cantidad"},
+    {text: "Contrato"},
+    {text: "Acciones"}   
+  ]
 
 
   useEffect(() => {
@@ -131,8 +138,8 @@ const ScannerProcess = () => {
     setShowAcordion("");
     setActiveAcordion("0")
     setLogs([]);
-    localStorage.removeItem('logMessages')
-    localStorage.setItem('show-acordion',showAcordion);
+    localStorage.removeItem('logMessages-scanner')
+    localStorage.setItem('show-acordion-scanner',showAcordion);
     
    
 
@@ -162,7 +169,7 @@ const ScannerProcess = () => {
           <Accordion.Header>Registros del Proceso</Accordion.Header>
           <Accordion.Body>
             <SelectForm data={dataFilter}/>
-            <Table rows={rows} handleShowModal={handleShowModal} />
+            <Table rows={rows} handleShowModal={handleShowModal} header={headerTable} />
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
